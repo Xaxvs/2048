@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 void draw_grid(const game_inst* instance) {
@@ -9,9 +10,9 @@ void draw_grid(const game_inst* instance) {
         for(int x = 0; x < 4; x++) {
             const Rectangle rec = {grid_x, grid_y, 80, 80};
             DrawRectangleRoundedLines(rec, 0.2f, 5, 2.0f, BLACK);
-            const int value = instance->values[x][i];
-            char str[5];
-            itoa(value, str, 10);
+            const unsigned int value = instance->values[x][i];
+            char str[12];
+            snprintf(str, sizeof(str), "%u", value);
             DrawText(str, grid_x + 20, grid_y + 10, 30, BLACK);
             grid_x += 90;
 
@@ -185,5 +186,3 @@ void move(const KeyboardKey key, game_inst* instance) {
 
     }
 }
-
-
